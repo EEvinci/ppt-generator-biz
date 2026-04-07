@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>近年AI应用技术串讲 2025-2026</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden}
+body{font-family:'PingFang SC','Microsoft YaHei','Helvetica Neue',sans-serif}
+.wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#e8ecf0}
+.box{position:relative;width:100%;height:100%;max-width:177.78vh;max-height:56.25vw;background:#fff;overflow:hidden}
+.s{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3% 7%;opacity:0;transform:translateX(100%);transition:all .4s cubic-bezier(.4,0,.2,1)}
+.s.on{opacity:1;transform:translateX(0)}
+.s.pr{opacity:0;transform:translateX(-100%)}
+.g-w{background:#fff}
+h1{font-size:4.5em;font-weight:900;line-height:1.1;color:#1a1a2e;margin-bottom:.15em;text-align:center}
+h2{font-size:3.6em;font-weight:800;line-height:1.1;color:#1a1a2e;margin-bottom:.15em;text-align:center}
+.sub{font-size:1.7em;color:#7f8c8d;font-weight:300;margin-bottom:.45em;text-align:center}
+.txt{font-size:1.9em;color:#374151;line-height:1.8;text-align:center}
+.txts{font-size:1.65em;color:#7f8c8d;line-height:1.75;text-align:center}
+.txtx{font-size:1.5em;color:#a0aec0;line-height:1.7;text-align:center}
+.bar{margin:.7em auto;width:3.5em;height:4px;background:#c0392b;border-radius:1px}
+.lbl{display:inline-block;padding:.22em 1.3em;border-radius:999px;font-size:1.5em;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.7em;text-align:center}
+.lr{background:#fde8e8;color:#c0392b;border:1px solid #f5b7b1}
+.lg2{background:#e8f6ef;color:#27ae60;border:1px solid #a9dfbf}
+.lb2{background:#e8ecf4;color:#2980b9;border:1px solid #aed6f1}
+.lo2{background:#fef9e7;color:#c9970c;border:1px solid #fae7a0}
+.ld2{background:#f2f3f4;color:#7f8c8d;border:1px solid #d5d8dc}
+.lp2{background:#f4ecf7;color:#8e44ad;border:1px solid #d7bde2}
+.c{background:#fff;border:1px solid #eaecf0;border-radius:.85em;padding:1.2em 1.6em;margin-top:.75em;box-shadow:0 1px 2px rgba(0,0,0,.04);width:100%}
+.cr{border-left:.5em solid #c0392b}.cg{border-left:.5em solid #27ae60}
+.cb{border-left:.5em solid #2980b9}.co{border-left:.5em solid #c9970c}
+.cp{border-left:.5em solid #8e44ad}
+.cbdy{font-size:1.7em;color:#374151;line-height:1.75;text-align:center}
+.ct{font-size:1.6em;font-weight:700;margin-bottom:.3em;color:#1a1a2e;text-align:center}
+.cred{color:#c0392b}.cgrn{color:#27ae60}.cbl{color:#2980b9}.cog{color:#c9970c}.cpur{color:#8e44ad}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.85em;margin-top:.75em;width:100%}
+.feat{display:flex;flex-direction:column;gap:.75em;margin-top:.75em;width:100%;align-items:center}
+.row{display:flex;align-items:center;gap:.7em;justify-content:center}
+.arrow{color:#c0392b;font-size:1.7em;flex-shrink:0}
+.rtxt{font-size:1.75em;color:#374151;line-height:1.75;text-align:center}
+.flow{display:flex;align-items:center;gap:.55em;margin-top:1.8em;flex-wrap:wrap;justify-content:center}
+.fi{display:flex;align-items:center;gap:.4em;background:#f8f9fa;border:1px solid #eaecf0;border-radius:.6em;padding:.42em 1.4em;font-size:1.7em;color:#374151}
+.fa{color:#c0c8d4;font-size:1.75em}
+.trio{display:flex;align-items:center;justify-content:center;gap:2em;margin-top:2.8em}
+.ic{flex:1;text-align:center;padding:1.9em 1.1em;border-radius:.95em}
+.ic-r{background:#fde8e8;border:1px solid #f5b7b1}
+.ic-g{background:#e8f6ef;border:1px solid #a9dfbf}
+.ic-o{background:#fef9e7;border:1px solid #fae7a0}
+.ie{font-size:3.6em;margin-bottom:.3em}
+.il{font-size:1.7em;font-weight:700}
+.il-r{color:#c0392b}.il-g{color:#27ae60}.il-o{color:#c9970c}
+.isub{font-size:1.35em;color:#7f8c8d;margin-top:.2em}
+.dots{position:fixed;bottom:1.1em;left:50%;transform:translateX(-50%);display:flex;gap:.35em;z-index:300}
+.dot{width:.65em;height:.65em;border-radius:50%;background:rgba(0,0,0,.15);cursor:pointer;transition:all .3s}
+.dot.on{background:#c0392b;transform:scale(1.5)}
+.pg{position:fixed;bottom:2.2em;left:50%;transform:translateX(-50%);font-size:.9em;color:#a0aec0;z-index:300}
+.ft{font-size:1.35em;color:#d1d5db;margin-top:auto;padding-top:1.8em;text-align:center}
+.hi{background:#fde8e8;border:1px solid #f5b7b1;border-radius:.85em;padding:1em 1.6em;margin-top:.75em;width:100%}
+.hi p{font-size:1.7em;color:#c0392b;line-height:1.75;text-align:center}
+.tag-row{display:flex;justify-content:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="box">
+
+<!-- S1 封面 -->
+<div class="s g-w on">
+  <p style="font-size:1.4em;color:#a0aec0;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.9em;text-align:center">2024-2026 · AI 应用技术全景</p>
+  <h1>近年 AI 应用技术串讲</h1>
+  <p class="sub">从 Foundation 到 Ecosystem · 从调优到 Harness</p>
+  <div class="bar"></div>
+  <p class="txtx">← → 键盘翻页 &nbsp;·&nbsp; 触摸滑动</p>
+</div>
+
+<!-- S2 全景 -->
+<div class="s g-w">
+  <div class="tag-row"><span class="lbl lr">Overview</span></div>
+  <h2>AI 应用技术全景</h2>
+  <div class="bar"></div>
+  <div class="feat">
+    <div class="row"><span class="arrow">→</span><span class="rtxt"><b style="color:#c0392b">Foundation</b> — LLM · Prompt · Fine-tune · RAG</span></div>
+    <div class="row"><span class="arrow">→</span><span class="rtxt"><b style="color:#2980b9">Interface</b> — Function Calling · MCP · A2A 协议</span></div>
+    <div class="row"><span class="arrow">→</span><span class="rtxt"><b style="color:#27ae60">Agent</b> — 单/多智能体 · Claude Code · Agent Teams</span></div>
+    <div class="row"><span class="arrow">→</span><span class="rtxt"><b style="color:#c9970c">Ecosystem</b> — Agent Skill · OpenClaw · Harness Engineering</span></div>
+  </div>
+  <div class="hi"><p>2025-2026 关键词：Agent 大规模落地 · MCP 协议生态爆发 · Harness 工程化 · Claude 份额飙升近 70% 反超 OpenAI</p></div>
+</div>
+
+<!-- S3 LLM -->
+<div class="s g-w">
+  <div class="tag-row"><span class="lbl lr">01 · Foundation</span></div>
+  <h2>LLM 竞争格局 2026</h2>
+  <div class="bar"></div>
+  <div class="g2">
+    <div class="c cr"><p class="ct cred">OpenAI GPT-5.2</p><p class="cbdy">2025.12 发布 · ChatGPT Agent 增强复杂推理 · 市场份额被 Claude 持续蚕食</p></div>
+    <div class="c cp"><p class="ct cpur">Anthropic Claude 4</p><p class="cbdy">Claude Opus 4.6 + Agent Teams · 2026.02 发布 · 份额飙升近 70% 反超 OpenAI</p></div>
+    <div class="c cb"><p class="ct cbl">Google Gemini</p><p class="cbdy">2025.12 Gemini Deep Research Agent · HLE 准确率 46.4% · 成本 GPT-5 的 1/10</p></div>
+    <div class="c cg"><p class="ct cgrn">国产模型崛起</p><p class="cbdy">DeepSeek · 豆包 · 通义千问 · 文心一言在特定场景逐步追赶</p></div>
+  </div>
+  <div class="hi"><p>Claude 市场份额飙升近 70%，OpenAI 护城河正在被攻破</p></div>
+</div>
+
+<!-- S4 Transformer -->
+<div class="s g-w">
+  <div class="tag-row"><span class="lbl ld2">Architecture</span></div>
+  <h2>Transformer 三种架构</h2>
+  <div class="bar"></div>
+  <div style="display:flex;flex-direction:column;gap:.75em;margin-top:.75em;width:100%">
+    <div class="c cr"><p class="ct cred">Encoder-Only · 仅编码器</p><p class="cbdy">BERT 系列 · 文本分类 · 实体识别 · 情感分析 · 问答</p></div>
+    <div class="c cg"><p class="ct cgrn">Encoder-Decoder · 编解码器</p><p class="cbdy">T5 · BART · 机器翻译 · 文本摘要</p></div>
+    <div class="c cb"><p class="ct cbl">Decoder-Only · 仅解码器 ← 主流</p><p class="cbdy">GPT 系列 · LLaMA · Claude · ChatGPT · 代码生成</p></div>
+  </div>
+  <p class="txtx" style="margin-top:.75em">Attention Is All You Need · Google, 2017 — 开启大模型时代</p>
+</div>
+
+<!-- S5 Prompt -->
+<div class="s g-w">
+  <div class="tag-row"><span class="lbl lr">02 · 调优手段</span></div>
+  <h2>Prompt Engineering</h2>
+  <div class="bar"></div>
+  <p class="txt" style="margin-bottom:.75em">通过设计和优化提示词，使大模型更准确、更可控地产生所需输出。</p>
+  <div class="g2">
+    <div class="c cr"><p class="ct cred">SYS · 系统提示词</p><p class="cbdy">定义角色：身份、行为规则、约束边界</p></div>
+    <div class="c cp"><p class="ct cpur">USR · 用户提示词</p><p class="cbdy">具体任务指令、Few-shot 示例、输出格式</p></div>
+  </div>
+  <div class="c cg" style="margin-top:.75em"><p class="ct cgrn">2025-2026 新趋势</p><p class="cbdy">结构化输出 + Chain-of-Thought + Tree-of-Thought + ReAct · 提升效果，不改变模型参数</p></div>
+</div>
+
+<!-- S6 Fine-tune -->
+<div class="s g-w">
+  <div class="tag-row"><span class="lbl lo2">03 · 训练</span></div>
+  <h2>Fine-tuning & LoRA</h2>
+  <div class="bar" style="background:#c9970c"></div>
+  <p class="txt" style="margin-bottom:.75em">在已有模型基础上，用特定数据再训练，让模型更适合某个具体任务或场景。</p>
+  <div class="g2">
+    <div class="c cp"><p class="ct cpur">Full Fine-tune</p><p class="cbdy">全量参数更新 · 显存占用大 · 效果最好 · 适合超大规模场景</p></div>
+    <div class="c cb"><p class="ct cbl">LoRA · 低秩适配</p><p class="cbdy">只训练低秩矩阵 · 显存减少 70%+ · 2025 年已成企业微调主流</p></div>
+  </div>
+  <div class="hi" style="background:#fef9e7;border-color:#fae7a0;margin-top:.75em"><p style="color:#c9970c">2026 应用：企业垂直领域微调（金融/医疗/法律）+ RLHF 对齐 · 相当于给通用模型注入"专业执照"</p></div>
+</div>
+
+<!-- S7 RAG -->
+<div class="s g-w">
+  <div class="tag-row"><span class="lbl lb2">04 · 知识增强</span></div>
+  <h2>RAG 检索增强生成</h2>
+  <div class="bar" style="background:#2980b9"></div>
+  <p class="txt" style="margin-bottom:.75em">先从外部知识库检索相关信息，再结合这些信息一起生成回答。</p>
+  <div class="feat">
+    <div class="row"><span class="arrow">→</span><span class="rtxt">提升模型知识准确性与可信度</span></div>
+    <div class="row"><span class="arrow">→</span><span class="rtxt">实时更新知识，无需重新训练模型</span></div>
+    <div class="row"><span class="arrow">→</span><span class="rtxt">减少幻觉 · 可溯源 · 可审计</span></div>
+  </div>
+  <div class="c cb" style="margin-top:.75em"><p class="ct cbl">2026 新演进</p><p class="cbdy">GraphRAG（知识图谱）+ Hybrid Search（稀疏+稠密检索融合）· Milvus / Qdrant / Chroma</p></div>
+</div>
+
+<!-- S8 FC/MCP/A2A -->
+<div class="s g-w">
+  <div class="tag-row"><span class="lbl lb2">05 · Interface</span></div>
+  <h2>Function Calling · MCP · A2A</h2>
+  <div class="bar" style="background:#2980b9"></div>
+  <div style="display:flex;flex-direction:column;gap:.75em;margin-top:.75em;width:100%">
+    <div class="c cr"><p class="ct cred">Function Calling</p><p class="cbdy">大模型按约定格式输出调用指令，外部系统执行操作。实现"只会说话"到"会调用工具"的跨越。</p></div>
+    <div class="c cp"><p class="ct cpur">MCP 协议</p><p class="cbdy">Anthropic 主推 · 标准化协议，AI 统一连接外部工具、数据源和服务。2025 年爆发，生态快速扩张。</p></div>
+    <div class="c cb"><p class="ct cbl">A2A 协议</p><p class="cbdy">Agent-to-Agent 协议 · 不同厂商 Agent 之间的通信标准。解决多厂商 Agent 互联互通问题。</p></div>
+  </div>
+</div>
+
+<!-- S9 Agent -->
+<div class="s g-w">
+  <div class="tag-row"><span class="lbl lr">06 · 核心</span></div>
+  <h2>Agent 智能体</h2>
+  <div class="bar"></div>
+  <p class="txt" style="margin-bottom:.75em">能够基于目标进行 <b style="color:#c0392b">思考 → 行动 → 观察</b> 循环，自主调用工具完成复杂任务的智能系统。</p>
+  <div class="flow">
+    <span class="fi">Prompt</span>
+    <span class="fa">+</span>
+    <span class="fi">LLM</span>
+    <span class="fa">+</span>
+    <span class="fi">Tools</span>
+    <span class="fa">+</span>
+    <span class="fi">Memory</span>
+  </div>
+  <p class="txts" style="margin-top:1.5em">本质是对人类行为的模拟 · 2026 年从"对话"进化为"代理执行"</p>
+</div>
+
+<!-- S10 Agent Loop -->
+<div class="s g-w">
+  <div class="tag-row"><span class="lbl lb2">Agent Loop</span></div>
+  <h2>思考 · 行动 · 观察 · 循环</h2>
+  <div class="trio">
+    <div class="ic ic-r"><div class="ie">思考</div><p class="il il-r">LLM 推理规划</p></div>
+    <span style="color:#c0c8d4;font-size:2.6em">→</span>
+    <div class="ic ic-g"><div class="ie">行动</div><p class="il il-g">调用工具 / 执行</p></div>
+    <span style="color:#c0c8d4;font-size:2.6em">→</span>
+    <div class="ic ic-o"><div class="ie">观察</div><p class="il il-o">结果反馈 / 判断</p></div>
+  </div>
+  <p class="txts" style="margin-top:2.8em">循环直到目标达成，或达到最大迭代次数</p>
+</div>
+
+<!-- S11 Multi-Agent -->
+<div class="s g-w">
+  <div class="tag-row"><span class="lbl lp2">07 · 协作</span></div>
+  <h2>Multi-Agent 多智能体系统</h2>
+  <div class="bar" style="background:#8e44ad"></div>
+  <p class="txt" style="margin-bottom:.75em">多个分工协作的 Agent 共同完成任务，通过拆分任务与隔离上下文解决复杂问题。</p>
+  <div class="g2">
+    <div class="c cp"><p class="ct cpur">Agent Teams（Anthropic）</p><p class="cbdy">Claude Opus 4.6 内置 · 多角色分工 · Agent 间原生通信 · 共享上下文</p></div>
+    <div class="c cb"><p class="ct cbl">OpenAI Swarm</p><p class="cbdy">Handoffs 交接机制 · 多 Agent 编排实验框架 · 轻量级探索方案</p></div>
+  </div>
+  <div class="hi" style="background:#f4ecf7;border-color:#d7bde2;margin-top:.75em"><p style="color:#8e44ad">注意事项：Token 消耗大 · 协作效率不稳定 · 系统复杂度高 · 需谨慎使用</p></div>
+</div>
+
+<!-- S12 Context Eng. -->
+<div class="s g-w">
+  <div class="tag-row"><span class="lbl lg2">08 · 上下文</span></div>
+  <h2>Context Engineering</h2>
+  <div class="bar" style="background:#27ae60"></div>
+  <p class="txt" style="margin-bottom:.75em">Agent 运行中的一切相关信息都是上下文：对话历史、用户输入、背景知识、工具结果……</p>
+  <div class="feat">
+    <div class="row"><span class="arrow">→</span><span class="rtxt">高质量筛选上下文（信息密度 > 信息量）</span></div>
+    <div class="row"><span class="arrow">→</span><span class="rtxt">有效压缩信息量（摘要 / 重要性排序 / 滑动窗口）</span></div>
+    <div class="row"><span class="arrow">→</span><span class="rtxt">最大化模型推理能力（上下文窗口优化 / RAG 协同）</span></div>
+  </div>
+  <div class="c cg" style="margin-top:.75em"><p class="ct cgrn">2026 趋势</p><p class="cbdy">128K+ 上下文窗口普及，但"压缩"能力成为核心竞争力</p></div>
+</div>
+
+<!-- S13 Agent Skill -->
+<div class="s g-w">
+  <div class="tag-row"><span class="lbl lo2">09 · 能力封装</span></div>
+  <h2>Agent Skill 技能封装</h2>
+  <div class="bar" style="background:#c9970c"></div>
+  <p class="txt" style="margin-bottom:.75em">将一整套 Agent 能力（Prompt、工具脚本，知识文件）封装为可复用模块，按需激活。</p>
+  <div class="c co">
+    <p class="ct cog">本质</p>
+    <p class="cbdy">Agent Skill ≈ <b style="color:#c9970c">子 Agent</b> ≈ SOP 的沉淀和复用</p>
+    <p class="txtx" style="margin-top:.4em;font-style:italic">"离职的同事终将化作温暖的 Skill"</p>
+  </div>
+  <div class="c" style="margin-top:.75em"><p class="cbdy">SkillHub 生态 · 2026 年收录 1.3 万+ Skills · 覆盖各行业场景，开箱即用</p></div>
+</div>
+
+<!-- S14 OpenClaw -->
+<div class="s g-w">
+  <div class="tag-row"><span class="lbl lb2">10 · 框架</span></div>
+  <h2>OpenClaw 开源 Agent 框架</h2>
+  <div class="bar" style="background:#2980b9"></div>
+  <p class="txt" style="margin-bottom:.75em">开源、高可扩展的 AI Agent 框架，基于 TypeScript 开发，用于构建可自定义的私人 AI 助手。</p>
+  <div class="feat">
+    <div class="row"><span class="arrow">✓</span><span class="rtxt">多平台接入（飞书 · Telegram · Discord · 钉钉 · 企业微信）</span></div>
+    <div class="row"><span class="arrow">✓</span><span class="rtxt">Skill 生态 SkillHub（1.3 万+ Skills，腾讯 CDN 加速）</span></div>
+    <div class="row"><span class="arrow">✓</span><span class="rtxt">MCP 原生支持 + 记忆系统 + Cron 定时任务 + Heartbeat</span></div>
+    <div class="row"><span class="arrow">✓</span><span class="rtxt">支持 DeepSeek · 豆包 · GPT · Claude 等多模型</span></div>
+  </div>
+</div>
+
+<!-- S15 Harness -->
+<div class="s g-w">
+  <div class="tag-row"><span class="lbl lr">11 · 工程实践</span></div>
+  <h2>Harness Engineering</h2>
+  <div class="bar"></div>
+  <p class="txt" style="margin-bottom:.75em">构建受控环境，让 Agent 在约束下高效可靠地完成长周期复杂任务。从"优化模型"转向"优化模型运行环境"。</p>
+  <div style="display:flex;flex-direction:column;gap:.75em;margin-top:.75em;width:100%">
+    <div class="c cr"><p class="ct cred">约束机制</p><p class="cbdy">Guardrails 护栏 · 权限边界 · 不可逾越红线 · 操作审计</p></div>
+    <div class="c cp"><p class="ct cpur">反馈回路</p><p class="cbdy">自验证循环 · 纠错机制 · 持续改进 · 错误不重复发生</p></div>
+    <div class="c cb"><p class="ct cbl">上下文架构</p><p class="cbdy">DeerFlow 2.0（字节开源）· Harness 实现标杆 · 2025 年爆火</p></div>
+  </div>
+  <div class="hi"><p>数据佐证：换 Harness 架构，AI 编程通过率 52.8% → 66.5%（Terminal Bench 2.0）</p></div>
+</div>
+
+<!-- S16 12点串联 -->
+<div class="s g-w">
+  <div class="tag-row"><span class="lbl ld2">Connection · 串联</span></div>
+  <h2>12 技术点 · 如何串联</h2>
+  <div class="bar"></div>
+  <div class="g2">
+    <div class="c cr"><p class="ct cred">Foundation · 基础层</p><p class="cbdy">LLM 底座 → Prompt 引导 → Fine-tune 注专长 → RAG 补知识 → Context 优化</p></div>
+    <div class="c cb"><p class="ct cbl">Interface · 接口层</p><p class="cbdy">Function Calling 调用工具 → MCP 标准化连接 → A2A 跨 Agent 通信</p></div>
+    <div class="c cg"><p class="ct cgrn">Agent · 智能体层</p><p class="cbdy">Agent Loop → Multi-Agent 协作 → Claude Code / Agent Teams → Context Eng.</p></div>
+    <div class="c co"><p class="ct cog">Ecosystem · 生态层</p><p class="cbdy">Agent Skill 封装 → OpenClaw 框架 → Harness 保障可靠性</p></div>
+  </div>
+</div>
+
+<!-- S17 结尾 -->
+<div class="s g-w">
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:0 6%;text-align:center">
+    <div style="width:3.5em;height:4px;background:#c0392b;border-radius:2px;margin-bottom:3em"></div>
+    <h1 style="font-size:5em;margin-bottom:.3em">让 AI 从工具<br>变成伙伴</h1>
+    <p style="font-size:1.9em;color:#7f8c8d;margin-bottom:.5em">从 Foundation 到 Ecosystem · 从调优到 Harness</p>
+    <div style="width:3.5em;height:4px;background:#c0392b;border-radius:2px;margin-top:3em;margin-bottom:2em"></div>
+    <p style="font-size:1.65em;color:#c0c8d4">Agent · Skill · OpenClaw · Harness Engineering</p>
+  </div>
+</div>
+
+</div>
+</div>
+
+<div class="dots" id="dots"></div>
+<div class="pg" id="pg">1 / 17</div>
+
+<script>
+(function(){
+  var ss=document.querySelectorAll(".s");
+  var dots=document.getElementById("dots");
+  var pg=document.getElementById("pg");
+  var cur=0;
+  ss.forEach(function(_,i){
+    var d=document.createElement("div");
+    d.className="dot"+(i===0?" on":"");
+    d.onclick=function(){go(i);};
+    dots.appendChild(d);
+  });
+  function go(i){
+    ss.forEach(function(s,j){
+      s.classList.remove("on","pr");
+      if(j===i)s.classList.add("on");
+      else if(j<i)s.classList.add("pr");
+    });
+    document.querySelectorAll(".dot").forEach(function(d,j){d.classList.toggle("on",j===i);});
+    pg.textContent=(i+1)+" / "+ss.length;
+    cur=i;
+  }
+  function nxt(){if(cur<ss.length-1)go(cur+1);}
+  function prv(){if(cur>0)go(cur-1);}
+  document.addEventListener("keydown",function(e){
+    if(e.key==="ArrowRight"||e.key===" ")nxt();
+    else if(e.key==="ArrowLeft")prv();
+  });
+  var tx=0;
+  document.addEventListener("touchstart",function(e){tx=e.changedTouches[0].clientX;},{passive:true});
+  document.addEventListener("touchend",function(e){
+    var d=tx-e.changedTouches[0].clientX;
+    if(Math.abs(d)>45)d>0?nxt():prv();
+  },{passive:true});
+})();
+</script>
+
+<style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.inland-security-footer {
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  right: 0;
+  width: fit-content;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tooltip-container {
+  position: relative;
+}
+
+.trigger-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background-color: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.minimax-link {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 300;
+  color: #adadad;
+  text-decoration: none;
+}
+
+.minimax-link:visited {
+  color: #adadad;
+}
+
+.minimax-link:hover {
+  color: #666666;
+}
+
+.tooltip-content {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  padding-bottom: 16px; /* 8px 内容间距 + 8px 用于鼠标移动的透明区域 */
+  font-size: 12px;
+  line-height: 17px;
+  background-color: #fafafa;
+  border-radius: 12px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  color: #171717;
+}
+
+/* 创建透明的连接区域，让鼠标可以平滑移动到 tooltip */
+.tooltip-content::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  right: 0;
+  height: 16px;
+}
+
+.tooltip-container:hover .tooltip-content {
+  display: flex;
+}
+
+.info-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.beian-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #171717;
+}
+
+.beian-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 2px;
+}
+
+.underline-text {
+  color: #171717;
+  text-decoration: underline;
+}
+
+.underline-text:hover {
+  color: #000000;
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .trigger-content {
+    background-color: transparent;
+  }
+
+  .minimax-link,
+  .minimax-link:visited {
+    color: #666666;
+  }
+
+  .minimax-link:hover {
+    color: #adadad;
+  }
+
+  .tooltip-content {
+    background-color: #262626;
+    color: #ededed;
+  }
+
+  .beian-link,
+  .underline-text {
+    color: #ededed;
+  }
+
+  .underline-text:hover {
+    color: #ffffff;
+  }
+}
+
+</style>
+<div class="inland-security-footer">
+  <div class="tooltip-container">
+    <div class="trigger-content">
+      <a href="https://www.minimaxi.com/" target="_blank" rel="noreferrer" class="minimax-link">
+        <span>© 2026 MiniMax</span>
+      </a>
+    </div>
+    <div class="tooltip-content">
+      <section class="info-section">
+        <span>上海稀宇科技有限公司</span>
+      </section>
+
+      <section class="info-section">
+        <a class="beian-link" href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010402010179" target="_blank" rel="noreferrer">
+          <img alt="hailuo-beian-icon" src="https://cdn.hailuoai.com/hailuo-video-web/public_assets/223037d3-79fd-4db0-a456-749f38a6a14b.png" class="beian-icon">
+          <span class="underline-text">沪公网安备31010402010179号</span>
+        </a>
+        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer" class="underline-text">
+          沪ICP备2023003282号-38
+        </a>
+      </section>
+
+      <section class="info-section">
+        <span>模型名称：MiniMax</span>
+        <span>备案号：Shanghai-MiniMax-202505230046</span>
+      </section>
+
+      <section class="info-section">
+        <a href="https://agent.minimaxi.com/doc/zh/terms-of-service.html" target="_blank" rel="noreferrer" class="underline-text">
+          用户协议
+        </a>
+        <a href="https://agent.minimaxi.com/doc/zh/privacy-policy.html" target="_blank" rel="noreferrer" class="underline-text">
+          隐私政策
+        </a>
+      </section>
+    </div>
+  </div>
+</div>
+
+
+<script>
+/**
+ * Iframe 元素高亮注入脚本
+ * 需要在目标网站中引入此脚本来支持跨域 iframe 高亮功能
+ *
+ * 使用方法：
+ * 1. 将此脚本添加到目标网站的 HTML 中
+ * 2. 或通过浏览器扩展、用户脚本等方式注入
+ */
+
+(function () {
+  "use strict";
+
+  // 检查是否在 iframe 中
+  if (window.self === window.top) {
+    return; // 不在 iframe 中，不执行
+  }
+
+  // 检查是否已经初始化过
+  if (window.__iframeHighlightInitialized) {
+    return;
+  }
+  window.__iframeHighlightInitialized = true;
+  console.log("Iframe 高亮脚本已加载");
+
+  // 创建高亮覆盖层
+  var overlay = document.createElement("div");
+  overlay.id = "iframe-highlight-overlay";
+  overlay.style.cssText = "\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    pointer-events: none;\n    z-index: 999999;\n    overflow: hidden;\n  ";
+
+  // 创建悬停高亮框（虚线边框）
+  var highlightBox = document.createElement("div");
+  highlightBox.id = "iframe-highlight-box";
+  highlightBox.style.cssText = "\n    position: absolute;\n    border: 2px dashed #007AFF;\n    background: rgba(0, 122, 255, 0.08);\n    pointer-events: none;\n    display: none;\n    transition: all 0.1s ease;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);\n    border-radius: 2px;\n  ";
+
+  // 创建选中节点的常驻高亮框（实线边框）
+  var selectedBox = document.createElement("div");
+  selectedBox.id = "iframe-selected-box";
+  selectedBox.style.cssText = "\n    position: absolute;\n    border: 2px solid #007AFF;\n    pointer-events: none;\n    display: none;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9), 0 0 8px rgba(255, 107, 53, 0.4);\n    border-radius: 2px;\n    z-index: 1000000;\n  ";
+
+  // 创建悬停标签显示
+  var tagLabel = document.createElement("div");
+  tagLabel.id = "iframe-tag-label";
+  tagLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 2px 6px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 2px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000001;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);\n    font-weight: 500;\n  ";
+
+  // 创建选中节点标签
+  var selectedLabel = document.createElement("div");
+  selectedLabel.id = "iframe-selected-label";
+  selectedLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 3px 8px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 3px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000002;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);\n    font-weight: 600;\n  ";
+  overlay.appendChild(highlightBox);
+  overlay.appendChild(selectedBox);
+  overlay.appendChild(tagLabel);
+  overlay.appendChild(selectedLabel);
+  document.body.appendChild(overlay);
+
+  // 存储当前选中的元素
+  var selectedElement = null;
+  var highlightEnabled = false;
+
+  // 更新选中元素的高亮显示
+  function updateSelectedHighlight(element) {
+    console.log("updateSelectedHighlight called with:", element);
+    if (!element) {
+      selectedBox.style.display = "none";
+      selectedLabel.style.display = "none";
+      selectedElement = null;
+      console.log("Cleared selected highlight");
+      return;
+    }
+    selectedElement = element;
+    var rect = element.getBoundingClientRect();
+    console.log("Selected element rect:", rect);
+
+    // 更新选中高亮框位置
+    selectedBox.style.display = "block";
+    selectedBox.style.left = "".concat(rect.left - 2, "px");
+    selectedBox.style.top = "".concat(rect.top - 2, "px");
+    selectedBox.style.width = "".concat(rect.width + 4, "px");
+    selectedBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新选中标签位置和内容
+    selectedLabel.style.display = "block";
+    selectedLabel.textContent = "\u2713 <".concat(element.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 28;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 5) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    var labelWidth = selectedLabel.offsetWidth || 100; // 预估宽度
+    if (labelLeft + labelWidth > window.innerWidth - 10) {
+      labelLeft = window.innerWidth - labelWidth - 10;
+    }
+    selectedLabel.style.left = "".concat(Math.max(5, labelLeft), "px");
+    selectedLabel.style.top = "".concat(labelTop, "px");
+    console.log("Selected highlight positioned at:", {
+      left: selectedBox.style.left,
+      top: selectedBox.style.top,
+      width: selectedBox.style.width,
+      height: selectedBox.style.height
+    });
+  }
+  function getElementSelector(element) {
+    if (!(element instanceof Element)) throw new Error('Argument must be a DOM element');
+    var segments = [];
+    var current = element;
+    while (current !== document.documentElement) {
+      var selector = '';
+      // 优先检查唯一ID
+      if (current.id && document.querySelectorAll("#".concat(current.id)).length === 1) {
+        segments.unshift("#".concat(current.id));
+        break; // ID唯一，无需继续向上
+      }
+
+      // 生成类名选择器（取第一个有效类名）
+      var classes = Array.from(current.classList).filter(function (c) {
+        return !c.startsWith('js-');
+      });
+      var className = classes.length > 0 ? ".".concat(classes[0]) : '';
+
+      // 生成位置索引（nth-child）
+      var tag = current.tagName.toLowerCase();
+      if (!className) {
+        var siblings = Array.from(current.parentNode.children);
+        var index = siblings.findIndex(function (el) {
+          return el === current;
+        }) + 1;
+        selector = "".concat(tag, ":nth-child(").concat(index, ")");
+      } else {
+        selector = className;
+      }
+      segments.unshift(selector);
+      current = current.parentElement;
+    }
+
+    // 处理根元素
+    if (current === document.documentElement) {
+      segments.unshift('html');
+    }
+    return segments.join(' > ');
+  }
+
+  // 获取元素文本内容
+  function getElementText(element) {
+    var _element$textContent;
+    if (element.tagName === "INPUT") {
+      return element.value || element.placeholder || "";
+    }
+    if (element.tagName === "TEXTAREA") {
+      return element.value || element.placeholder || "";
+    }
+    var text = ((_element$textContent = element.textContent) === null || _element$textContent === void 0 ? void 0 : _element$textContent.trim()) || "";
+    return text.length > 50 ? text.substring(0, 50) + "..." : text;
+  }
+
+  // 获取元素属性信息
+  function getElementAttributes(element) {
+    var attrs = {};
+    for (var i = 0; i < element.attributes.length; i++) {
+      var attr = element.attributes[i];
+      attrs[attr.name] = attr.value;
+    }
+    return attrs;
+  }
+
+  // 鼠标悬停事件处理
+  function handleMouseOver(e) {
+    if (!highlightEnabled) return;
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免高亮 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 如果是已选中的元素，不显示悬停高亮
+    if (target === selectedElement) {
+      highlightBox.style.display = "none";
+      tagLabel.style.display = "none";
+      return;
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+
+    // 更新悬停高亮框位置
+    highlightBox.style.display = "block";
+    highlightBox.style.left = "".concat(rect.left - 2, "px");
+    highlightBox.style.top = "".concat(rect.top - 2, "px");
+    highlightBox.style.width = "".concat(rect.width + 4, "px");
+    highlightBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新标签位置和内容
+    tagLabel.style.display = "block";
+    tagLabel.textContent = "<".concat(target.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 22;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 0) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    if (labelLeft + tagLabel.offsetWidth > window.innerWidth) {
+      labelLeft = window.innerWidth - tagLabel.offsetWidth - 5;
+    }
+    tagLabel.style.left = "".concat(Math.max(0, labelLeft), "px");
+    tagLabel.style.top = "".concat(labelTop, "px");
+
+    // 发送消息到父窗口
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 鼠标离开事件处理
+  function handleMouseOut(e) {
+    if (!highlightEnabled) return;
+    var relatedTarget = e.relatedTarget;
+
+    // 如果鼠标移动到高亮相关元素上，不隐藏高亮
+    if (relatedTarget && (relatedTarget === highlightBox || relatedTarget === tagLabel || relatedTarget === overlay || relatedTarget === selectedBox || relatedTarget === selectedLabel)) {
+      return;
+    }
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: null,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 点击事件处理
+  function handleClick(e) {
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免处理 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 检查是否是交互元素，这些元素需要保留默认行为
+    var isInteractiveElement = ['input', 'textarea', 'select', 'button', 'a'].includes(target.tagName.toLowerCase());
+
+    // 如果高亮功能启用，对于非交互元素阻止默认行为和事件传播
+    if (highlightEnabled) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+    console.log("Element clicked:", {
+      tagName: target.tagName,
+      selector: selector,
+      rect: rect
+    });
+
+    // 立即更新选中高亮
+    updateSelectedHighlight(target);
+
+    // 隐藏悬停高亮，因为现在是选中状态
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-click",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 监听来自父窗口的消息
+  function handleParentMessage(event) {
+    console.log("Received message from parent:", event.data);
+    if (event.data.type === "iframe-highlight-toggle") {
+      var enabled = event.data.enabled;
+      console.log("Highlight toggle:", enabled);
+      if (enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "enable-iframe-highlight") {
+      console.log("Enable iframe highlight");
+      enableHighlight();
+    } else if (event.data.type === "disable-iframe-highlight") {
+      console.log("Disable iframe highlight");
+      disableHighlight();
+    } else if (event.data.type === "toggle-iframe-highlight") {
+      var _enabled = event.data.enabled !== undefined ? event.data.enabled : !highlightEnabled;
+      console.log("Toggle iframe highlight to:", _enabled);
+      if (_enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "update-selected-element") {
+      var selector = event.data.selector;
+      console.log("Update selected element with selector:", selector);
+      if (selector) {
+        try {
+          var element = document.querySelector(selector);
+          console.log("Found element by selector:", element);
+          updateSelectedHighlight(element);
+        } catch (error) {
+          console.warn("Failed to select element:", error);
+          updateSelectedHighlight(null);
+        }
+      } else {
+        updateSelectedHighlight(null);
+      }
+    } else if (event.data.type === "clear-selected-element") {
+      console.log("Clear selected element");
+      updateSelectedHighlight(null);
+    }
+  }
+
+  // 启用高亮功能
+  function enableHighlight() {
+    console.log("Enabling highlight");
+    document.addEventListener("mouseover", handleMouseOver, true);
+    document.addEventListener("mouseout", handleMouseOut, true);
+    document.addEventListener("click", handleClick, true);
+    highlightEnabled = true;
+    overlay.style.display = "block";
+  }
+
+  // 禁用高亮功能
+  function disableHighlight() {
+    console.log("Disabling highlight");
+    highlightEnabled = false;
+    // 保持事件监听器，但通过 highlightEnabled 变量控制行为
+    // 这样可以保留选中状态的显示
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    // 不隐藏 selectedBox 和 selectedLabel，保留选中状态
+  }
+
+  // 完全禁用高亮功能（移除所有监听器）
+  function fullyDisableHighlight() {
+    console.log("Fully disabling highlight");
+    highlightEnabled = false;
+    document.removeEventListener("mouseover", handleMouseOver, true);
+    document.removeEventListener("mouseout", handleMouseOut, true);
+    document.removeEventListener("click", handleClick, true);
+    overlay.style.display = "none";
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    selectedBox.style.display = "none";
+    selectedLabel.style.display = "none";
+  }
+
+  // 添加事件监听
+  enableHighlight();
+  window.addEventListener("message", handleParentMessage);
+
+  // 暴露全局函数供外部调用
+  window.__iframeHighlightControl = {
+    enable: enableHighlight,
+    disable: disableHighlight,
+    fullyDisable: fullyDisableHighlight,
+    isEnabled: function isEnabled() {
+      return highlightEnabled;
+    },
+    getSelectedElement: function getSelectedElement() {
+      return selectedElement;
+    },
+    updateSelected: updateSelectedHighlight,
+    // 通过消息发送开关控制
+    sendToggleMessage: function sendToggleMessage(enabled) {
+      window.parent.postMessage({
+        type: 'iframe-highlight-status',
+        enabled: enabled || highlightEnabled,
+        source: 'iframe-highlight-injector'
+      }, '*');
+    }
+  };
+
+  // 通知父窗口脚本已加载
+  try {
+    window.parent.postMessage({
+      type: "iframe-highlight-ready",
+      data: {
+        url: window.location.href,
+        userAgent: navigator.userAgent,
+        timestamp: Date.now()
+      },
+      source: "iframe-highlight-injector"
+    }, "*");
+  } catch (error) {
+    console.warn("无法发送就绪消息到父窗口:", error);
+  }
+
+  // 清理函数
+  window.__iframeHighlightCleanup = function () {
+    fullyDisableHighlight();
+    window.removeEventListener("message", handleParentMessage);
+    if (overlay.parentElement) {
+      overlay.parentElement.removeChild(overlay);
+    }
+    delete window.__iframeHighlightInitialized;
+    delete window.__iframeHighlightCleanup;
+  };
+})();
+
+</script>
+</body>
+</html>
